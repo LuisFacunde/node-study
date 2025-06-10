@@ -1,11 +1,11 @@
-import http from 'node:http'
+import http from "node:http";
 
 // - Criar usuários
 // - Listar usuários
 // - Atualizar usuários
 // - Deletar usuários
 
-// - HTTP   
+// - HTTP
 //     - Métodos HTTP (GET, POST, PUT, PATCH, DELETE)
 //     - URL
 
@@ -16,42 +16,41 @@ import http from 'node:http'
 // Cabeçalhoss (Requisição/Resposta) -> Metadados
 
 // HTTP Status Codes
-const users = []
+const users = [];
 
 const server = http.createServer((req, res) => {
-    const { method, url } = req
+  const { method, url } = req;
 
-    if (method == 'GET' && url == '/users') {
-        return res
-        .setHeader('Content-type', "application/json")
-        .writeHead(200)
-        .end(JSON.stringify(users))
-    }
+  if (method == "GET" && url == "/users") {
+    return res
+      .setHeader("Content-type", "application/json")
+      .writeHead(200)
+      .end(JSON.stringify(users));
+  }
 
-    if (method == 'POST' && url == '/users') {
-        users.push({
-            id: 1,
-            nome: 'Tyler Joseph',
-            email: 'tylerj@exemple.com'
-        })
-        
-        return res.writeHead(201).end()
-    }
+  if (method == "POST" && url == "/users") {
+    users.push({
+      id: 1,
+      nome: "Tyler Joseph",
+      email: "tylerj@exemple.com",
+    });
 
-    if (method == 'PUT' && url == '/users') {
-        return res.end('Atualiza informações do usuário')
-    }
+    return res.writeHead(201).end();
+  }
 
-    if (method == 'DELETE' && url == '/users') {
-        return res.end('Deleta um usuário')
-    }
-    
-    return res.writeHead(404).end()
-})
+  if (method == "PUT" && url == "/users") {
+    return res.end("Atualiza informações do usuário");
+  }
 
-server.listen(3333)
+  if (method == "DELETE" && url == "/users") {
+    return res.end("Deleta um usuário");
+  }
+
+  return res.writeHead(404).end();
+});
+
+server.listen(3333);
 // localhost:3333
-
 
 // Métodos de importação
 // CommonJS => require
