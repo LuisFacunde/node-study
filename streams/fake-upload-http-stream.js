@@ -14,11 +14,12 @@ class OneToHundredStream extends Readable {
 
         this.push(buf)
       }
-    }, 1000);
+    }, 1000)
   }
 }
 
 fetch("http://localhost:3334", {
   method: "POST",
   body: new OneToHundredStream(),
+  duplex: 'half'
 });

@@ -3,11 +3,11 @@ import { Transform } from "node:stream";
 
 class InverseNumberStream extends Transform {
   _transform(chunck, encoding, callback) {
-    const transformed = Number(chunck.toString()) * -1
+    const transformed = Number(chunck.toString()) * -1;
 
-    console.log(transformed)
+    console.log(transformed);
 
-    callback(null, Buffer.from(String(transformed)))
+    callback(null, Buffer.from(String(transformed)));
   }
 }
 
@@ -17,7 +17,7 @@ class InverseNumberStream extends Transform {
 const server = http.createServer((req, res) => {
   return req
     .pipe(new InverseNumberStream())
-    .pipe(res)
+    .pipe(res);
 });
 
 server.listen(3334);

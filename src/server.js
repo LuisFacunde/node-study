@@ -34,7 +34,7 @@ const server = http.createServer((req, res) => {
       nome: "Tyler Joseph",
       email: "tylerj@exemple.com",
     });
-
+F
     return res.writeHead(201).end();
   }
 
