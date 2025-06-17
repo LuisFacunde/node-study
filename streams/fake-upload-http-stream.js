@@ -23,9 +23,9 @@ fetch("http://localhost:3334", {
   body: new OneToHundredStream(),
   duplex: "half",
 })
-  .then(response => {
-    return response.text()
+  .then((response) => {
+    return response.text();
   })
-  .then(data => {
-    console.log(data)
+  .then((data) => {
+    console.log(data);
   });
