@@ -12,7 +12,7 @@ export async function json(req, res) {
     req.body = null;
   }
 
-  res.setHeader("Contente-type", "application/json");
+  res.setHeader("Content-type", "application/json");
 
   console.log(req.body);
 }
