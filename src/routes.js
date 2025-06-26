@@ -1,5 +1,6 @@
 import { Database } from "./database.js";
 import { randomUUID } from "node:crypto";
+import { buildRoutePath } from "./utils/build-route-path.js";
 // UUDI => Unique Universal ID
 
 const database = new Database();
@@ -7,7 +8,7 @@ const database = new Database();
 export const routes = [
   {
     method: "GET",
-    path: "/users",
+    path: buildRoutePath("/users"),
     handle: (req, res) => {
       const users = database.select("users");
 
@@ -16,7 +17,7 @@ export const routes = [
   },
   {
     method: "POST",
-    path: "/users",
+    path: buildRoutePath("/users"),
     handle: (req, res) => {
       const { name, email } = req.body;
 
@@ -32,17 +33,17 @@ export const routes = [
     },
   },
   {
+    method: "DELETE",
+    path: buildRoutePath("/users/:id/groups/:groupID"),
+    handle: (req, res) => {
+      return res.end();
+    },
+  },
+  {
     method: "PUT",
     path: "/users",
     handle: (req, res) => {
       return res.end("Atualiza informações do usuário");
-    },
-  },
-  {
-    method: "DELETE",
-    path: "/users",
-    handle: (req, res) => {
-      return res.end("Deleta um usuário");
     },
   },
 ];
