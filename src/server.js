@@ -16,13 +16,12 @@ const server = http.createServer(async (req, res) => {
   
   await json(req, res)
 
-  const route = routes.find((route) => {
+  const route = routes.find(route => {
     return route.method == method && route.path.test(url)
   })
 
   if (route) {
     const routeParams = req.url.match(route.path)
-
     // console.log(extractQueryParams(routeParams.groups.query))
 
     const { query, ...params } = routeParams.groups
@@ -30,7 +29,7 @@ const server = http.createServer(async (req, res) => {
     req.params = params
     req.query = query ? extractQueryParams(query) : {}
 
-    return route.handle(req, res)
+    return route.handler(req, res)
   }
 
   return res.writeHead(404).end()
