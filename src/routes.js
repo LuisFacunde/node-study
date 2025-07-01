@@ -33,17 +33,29 @@ export const routes = [
     },
   },
   {
-    method: "DELETE",
-    path: buildRoutePath("/users/:id/groups/:groupID"),
+    method: "PUT",
+    path: buildRoutePath("/users/:id"),
     handle: (req, res) => {
-      return res.end();
+      const { id } = req.params;
+      const { name, email } = req.body;
+
+      database.update("users", id, {
+        name,
+        email,
+      });
+
+      return res.writeHead(204).end();
     },
   },
   {
-    method: "PUT",
-    path: "/users",
+    method: "DELETE",
+    path: buildRoutePath("/users/:id"),
     handle: (req, res) => {
-      return res.end("Atualiza informações do usuário");
+      const { id } = req.params
+
+      database.delete('users', id)
+
+      return res.writeHead(204).end()
     },
   },
 ];
