@@ -1,6 +1,7 @@
 import http from "node:http";
 import { json } from "./middlewares/json.js";
 import { routes } from "./routes.js";
+import { extractQueryParams } from "./utils/extract-query-params.js";
 
 // Query Parameters: Parametro Nomeado - utilizado em URL Stateful => filtros, paginação, não-obrigatório
 // http://localhost:3333/users?userID=1&name=Luis - cada parametro possui um nome e um valor
@@ -22,9 +23,12 @@ const server = http.createServer(async (req, res) => {
   if (route) {
     const routeParams = req.url.match(route.path)
 
-    console.log(routeParams.groups)
+    // console.log(extractQueryParams(routeParams.groups.query))
 
-    req.params = { ...routeParams.groups }
+    const { query, ...params } = routeParams.groups
+    
+    req.params = params
+    req.query = query ? extractQueryParams(query) : {}
 
     return route.handle(req, res)
   }

@@ -10,6 +10,8 @@ export const routes = [
     method: "GET",
     path: buildRoutePath("/users"),
     handle: (req, res) => {
+      confirm.log(req.query)
+
       const users = database.select("users");
 
       return res.end(JSON.stringify(users));
